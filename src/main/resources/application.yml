@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: closetoyou
+  profiles:
+    include:
+      - jwt
+      - oauth
+      - server
+      - database
+      - variable
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_ID}
+    password: ${DATABASE_PW}
+    driver-class-name: ${DATABASE_DRIVER_CLASS_NAME}
+    hikari:
+      connection-init-sql: SET NAMES utf8mb4
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${GOOGLE.MAIL.ADDRESS}
+    password: ${GOOGLE.MAIL.PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
