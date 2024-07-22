@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ssafy.closetoyou.domain.user.dto.request.UserModifyRequestDto;
 import ssafy.closetoyou.domain.user.dto.request.UserSignUpRequestDto;
 import ssafy.closetoyou.domain.user.dto.response.UserResponseDto;
+import ssafy.closetoyou.domain.user.exception.NotExistUserException;
 import ssafy.closetoyou.domain.user.service.UserService;
 import ssafy.closetoyou.global.common.response.ApiResponse;
 import ssafy.closetoyou.global.jwt.service.JwtService;
@@ -40,7 +41,7 @@ public class UserController {
             return new ApiResponse<>(200, true, userResponseDto, "사용자 정보 불러오기 성공");
         } catch (Exception e) {
             log.error("Error fetching user information", e);
-            return new ApiResponse<>(404, false, null, e.getMessage());
+            throw NotExistUserException.EXCEPTION;
         }
     }
 
@@ -56,7 +57,7 @@ public class UserController {
             return new ApiResponse<>(200, true, userResponseDto, "사용자 정보 수정 성공");
         } catch (Exception e) {
             log.error("Error fetching user information", e);
-            return new ApiResponse<>(404, false, null, e.getMessage());
+            throw NotExistUserException.EXCEPTION;
         }
     }
 }
